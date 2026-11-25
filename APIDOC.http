@@ -16,3 +16,39 @@ Content-Type: application/json
     "username" :"Maya",
     "password": "maya@123"
 }
+
+###
+POST  http://127.0.0.1:8000/task/
+Content-Type: application/json
+
+{
+    "title" : "To complete the Django project",
+    "description":" half way to finish the project, Api token generation is pending",
+    "status ": "pending",
+
+}
+
+###
+GET http://127.0.0.1:8000/task/1/
+Accept: application/json
+Authorization: Token 
+
+###
+PUT http://127.0.0.1:8000/task/1/
+Content-Type: application/json
+Authorization: Token 
+
+{
+     "title" : "To complete the Django project",
+    "description":" half way to finish the project, Api token generation is done",
+    "status ": "pending"
+}
+
+###
+DELETE http://127.0.0.1:8000/task/1/
+Authorization: Token
+
+###
+POST http://127.0.0.1:8000/logout/
+Content-Type: application/json
+Authorization: Token

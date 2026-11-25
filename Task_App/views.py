@@ -19,8 +19,7 @@ class RegistrationView(APIView):
         return Response(data= {
             "Message" :"Registration Succesfull..!",
             "Data" :serializer_instance.data})
-         
-
+    
 class TaskListCreateView(APIView):
 
     permission_classes =[IsAuthenticated]
@@ -94,7 +93,15 @@ class TaskUpdateRetrieveDeleteView(APIView):
             "Message" : "Deletion Succesfull..!!"
         })
 
-            
+class LogoutView(APIView):
+
+    def post(self,request):
+
+        request.user.authtoken.delete()
+
+        return Response(data={
+            "Message" : "Token Deleted Succesfully..!!"
+        })
 
 
         

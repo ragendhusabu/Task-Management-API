@@ -22,6 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/',views.RegistrationView.as_view()),
     path('login/',obtain_auth_token),
+    path('task/',views.TaskListCreateView.as_view()),
+    path('task/<int:pk>/',views.TaskUpdateRetrieveDeleteView.as_view()),
+    path('logout/',views.LogoutView.as_view())
 
 
 ]
