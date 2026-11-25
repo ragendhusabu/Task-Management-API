@@ -1,0 +1,18 @@
+###
+POST  http://127.0.0.1:8000/register/
+Content-Type : application/json
+
+{
+    "username" :"Tom",
+    "email": "tom@gmail.com",
+    "password": "tom@123"
+}
+
+###
+POST http://127.0.0.1:8000/login/
+Content-Type: application/json
+
+{
+    "username" :"Maya",
+    "password": "maya@123"
+}
