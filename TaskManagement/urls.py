@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from Task_App import views
 from rest_framework.authtoken.views import obtain_auth_token
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/',views.RegistrationView.as_view()),

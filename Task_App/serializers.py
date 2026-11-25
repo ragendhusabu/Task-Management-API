@@ -6,20 +6,21 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
 
+        password = serializers.CharField(write_only =True)
         model = User
         fields =["username","email","password"]
         read_only_fields  =["id"]
-
-        def create(self,validated_data):
-            user = User.objects.create_user(
+    def create(self,validated_data):
+        user = User.objects.create_user(
                 username= validated_data["username"],
                 email=validated_data["email"],
                 password = validated_data["password"]
-            )
-
+        )
+        return user
+    
 class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TaskDb
         fields = "__all__"
-        read_only_fields =["id","due_date"]
+        read_only_fields =["id","user"]

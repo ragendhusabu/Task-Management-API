@@ -14,11 +14,14 @@ class RegistrationView(APIView):
 
         form_data = request.data
         serializer_instance = RegistrationSerializer(data=form_data)
-        serializer_instance.is_valid()
-        serializer_instance.save()
-        return Response(data= {
-            "Message" :"Registration Succesfull..!",
-            "Data" :serializer_instance.data})
+        if serializer_instance.is_valid(raise_exception=True):
+            serializer_instance.save()
+            return Response(data= {
+                        "Message" :"Registration Succesfull..!",
+                        "Data" :serializer_instance.data
+                        })
+        else:
+            raise serializers.ValidationError("SOME ERROR OCCURED")
     
 class TaskListCreateView(APIView):
 
@@ -53,19 +56,19 @@ class TaskUpdateRetrieveDeleteView(APIView):
 
     def get(self,request,pk):
 
-        qs = TaskDb.objects.filter(user = request.user)
+        task_object = get_object_or_404(
+            TaskDb,
+            id=pk,
+            user=request.user
+        )
 
-        serializer_instance = TaskSerializer(qs,many=True)
+        serializer_instance = TaskSerializer(task_object)
+        return Response(data = serializer_instance.data)
 
-        if serializer_instance.is_valid():
-            serializer_instance.save()
-            return Response(data = serializer_instance.data)
-        else:
-            return Response(data=serializer_instance.errors)
         
     def put(self,request,pk):
 
-        task_object = get_object_or_404(TaskDb,id=pk)
+        task_object = get_object_or_404(TaskDb,id=pk,user = request.user)
 
         if task_object.user != request.user:
             raise serializers.ValidationError("only owners can update data..")
@@ -97,7 +100,7 @@ class LogoutView(APIView):
 
     def post(self,request):
 
-        request.user.authtoken.delete()
+        request.auth.delete()
 
         return Response(data={
             "Message" : "Token Deleted Succesfully..!!"

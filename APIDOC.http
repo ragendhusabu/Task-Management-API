@@ -3,9 +3,9 @@ POST  http://127.0.0.1:8000/register/
 Content-Type : application/json
 
 {
-    "username" :"Tom",
-    "email": "tom@gmail.com",
-    "password": "tom@123"
+    "username" :"Anu",
+    "email": "anu@gmail.com",
+    "password": "anu@123"
 }
 
 ###
@@ -13,42 +13,46 @@ POST http://127.0.0.1:8000/login/
 Content-Type: application/json
 
 {
-    "username" :"Maya",
-    "password": "maya@123"
+    "username" :"Anu",
+    "password": "anu@123"
 }
 
 ###
 POST  http://127.0.0.1:8000/task/
 Content-Type: application/json
+Authorization:Token f41ee5ea06bcf5b2fc30b59379e286025b3e48c0
 
 {
-    "title" : "To complete the Django project",
-    "description":" half way to finish the project, Api token generation is pending",
-    "status ": "pending",
-
+    "title": "To complete the Django project",
+    "description": "Half way to finish the project, API token generation is pending",
+    "due_date": "2026-11-30",
+    "status": "pending"
 }
 
 ###
 GET http://127.0.0.1:8000/task/1/
 Accept: application/json
-Authorization: Token 
+Authorization: Token f41ee5ea06bcf5b2fc30b59379e286025b3e48c0
+
 
 ###
 PUT http://127.0.0.1:8000/task/1/
 Content-Type: application/json
-Authorization: Token 
+Authorization: Token f41ee5ea06bcf5b2fc30b59379e286025b3e48c0
+
 
 {
-     "title" : "To complete the Django project",
-    "description":" half way to finish the project, Api token generation is done",
-    "status ": "pending"
+    "title": "Complete Django REST Framework project",
+    "description": "Registration, token authentication and CRUD operations completed",
+    "due_date": "2026-12-05",
+    "status": "done"
 }
 
 ###
 DELETE http://127.0.0.1:8000/task/1/
-Authorization: Token
+Authorization: Token f41ee5ea06bcf5b2fc30b59379e286025b3e48c0
 
 ###
 POST http://127.0.0.1:8000/logout/
 Content-Type: application/json
-Authorization: Token
+Authorization: Token f41ee5ea06bcf5b2fc30b59379e286025b3e48c0
